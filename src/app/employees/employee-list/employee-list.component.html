@@ -1,0 +1,28 @@
+
+<table class="table table-hover">
+  <tr *ngFor="let emp of service.list">
+  
+    <td (click)="populateForm(emp)">{{emp.Title}}</td>
+<ng-container [ngSwitch]="emp.Category">
+        <ng-container *ngSwitchCase="'One'"> <td (click)="populateForm(emp)" class="blue">category {{emp.Category}}</td></ng-container>
+        <ng-container *ngSwitchCase="'Two'"> <td (click)="populateForm(emp)" class="green">category {{emp.Category}}</td></ng-container>
+        <ng-container *ngSwitchCase="'Three'"> <td (click)="populateForm(emp)" class="red">category {{emp.Category}}</td></ng-container>
+      </ng-container>
+      <ng-container [ngSwitch]="emp.Tags">
+        <ng-container *ngSwitchCase="'1'"> <td (click)="populateForm(emp)"  class="yellow">tag {{emp.Tags}}</td></ng-container>
+        <ng-container *ngSwitchCase="'2'"> <td (click)="populateForm(emp)" class="cyan">tag {{emp.Tags}}</td></ng-container>
+        <ng-container *ngSwitchCase="'3'">  <td (click)="populateForm(emp)" class="mag">tag {{emp.Tags}}</td></ng-container>
+        <ng-container *ngSwitchCase="''">  <td (click)="populateForm(emp)" >no tag</td></ng-container>
+      </ng-container>
+   
+  <ng-container *ngIf="emp.Description.length>23"> 
+<td (click)="populateForm(emp)" ngbTooltip="{{emp.Description}}" container="body"> {{ (emp.Description.length>23)? (emp.Description | slice:0:23)+'...':(emp.Description) }}</td>
+ </ng-container>
+ <!---   <ejs-tooltip id="tooltip" content="{{emp.Description}}"></ejs-tooltip> -->
+<ng-container *ngIf="emp.Description.length<=23">
+  <td (click)="populateForm(emp)"> {{ (emp.Description.length>23)? (emp.Description | slice:0:23)+'...':(emp.Description) }}</td>
+  </ng-container>
+    <td><button (click)="onDelete(emp._id)" class="btn btn-sm btn-outline-danger">X</button></td>
+  </tr>
+  
+</table>
